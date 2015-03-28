@@ -1,0 +1,44 @@
+#include <stdio.h>
+#include "list.h"
+#include <stdlib.h>
+#include <assert.h>
+
+struct node_struct * newNode(int v){
+	struct node_struct *n = (struct node_struct*) malloc(sizeof(struct node_struct));
+	assert(n != NULL);
+	(*n).value = v;
+	n->value = v;
+	n->next = NULL;
+	return n;
+}
+
+void deleteNode(struct node_struct *n){
+	free(n);
+}
+
+int get_long(struct node_struct *l){
+	if(l->next == NULL){
+		return 1;
+	}
+	else
+		return 1+get_long(l->next);
+}
+int get_long_iter(struct node_struct *l){
+  int iterador=0;
+  struct node_struct *n = (struct node_struct*) malloc(sizeof(struct node_struct));
+  assert(n != NULL);
+  while(l->next != NULL){
+    iterador+=1;
+  }
+  return iterador;
+       
+}
+
+
+void print_list(struct node_struct* l){
+	printf("[");
+	for(; l != NULL; l= l->next){
+		printf("%d%c ", l->value, l->next != NULL ? ',': ']');
+	}
+
+}
